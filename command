@@ -18,6 +18,10 @@ docker-compose build
  docker-compose down
  docker rmi ba7a93aae2a8
 
+-- detached mode
+docker-compose up --build -d
+
+-- delete all images
 docker-compose down --rmi all
 
 docker container ls
@@ -36,3 +40,12 @@ docker exec -it d048e4bedfc5 bash
 
 
 sudo netstat -ntlp
+
+Backup:
+sudo su
+docker exec 027538d76248 /usr/bin/mysqldump -u root --password=sangram#81 AppDb > /home/sangram/dockerize/apiStack001/db/backup/files/23042023.sql
+
+
+Restore
+
+cat /home/sangram/dockerize/apiStack001/db/backup/files/23042023.sql | docker exec -i 027538d76248 /usr/bin/mysql -u root --password=sangram#81 AppDb
